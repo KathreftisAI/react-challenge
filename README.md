@@ -25,9 +25,13 @@ The app contains only One Page. Refer to given Screen for Reference.
 #### Dropdown Values
 
 Language : `EN-US, DE-DE, FR-FR, PL-PL, ES-ES, PT-BR, ZH-CN, KO-KR`
+
 Items List: [JSON HERE](https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.json "JSON HERE")
+
 Tiers : `T1-T8`
+
 Enchantment: `0-3`
+
 Quality: `Defaults to 0. Valid values are 1 for Normal, 2 for Good, 3 for Outstanding, 4 for Excellent and 5 for Masterpiece`
 
 To Load the image use below call. Explanation [Here](https://wiki.albiononline.com/wiki/API:Render_service "Here")
