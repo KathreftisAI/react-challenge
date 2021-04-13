@@ -40,16 +40,16 @@ export const setItemList = (itemList) => {
   };
 };
 
-export const setPrice = (price) => {
+export const setItemObj = (itemObj) => {
   return {
-    type: 'set_price',
-    price: price 
+    type: 'set_itemobj',
+    payload: itemObj 
   };
 };
 
-export const setLocation = (location) => {
+export const setItemPrice = (price) => {
   return {
-    type: 'set_location',
-    location: location 
+    type: 'set_price',
+    payload: price 
   };
 };

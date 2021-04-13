@@ -2,17 +2,18 @@ import React from 'react';
 import { Row, Col, Typography, Card, Space, Divider } from 'antd';
 import './main-content.css'
 
-const MainContent = ({ name, enhancement, quality, tier }) => {
+const MainContent = ({ filters, item }) => {
+
   return(
     <section className='main-content'>
       <Space direction='horizontal' align='center'>
-        <img src={`https://render.albiononline.com/v1/item/${tier}_${name}.png?quality=${quality}`} />
+        <img src={item && item.UniqueName ? `https://render.albiononline.com/v1/item/${item.UniqueName}.png?quality=${filters.quality}` : ''} />
         <Space direction='vertical'>
           <Space direction='horizontal' size='middle' align='center'>
-            <Typography.Title level={2} style={{ fontSize: '21px' }}>{name}</Typography.Title>
-            <Typography.Text>{tier}</Typography.Text>
+            <Typography.Title level={2} style={{ fontSize: '21px' }}>{item && item.LocalizedNames ? item.LocalizedNames[filters.language] : ''}</Typography.Title>
+            <Typography.Text>{filters.tier}</Typography.Text>
           </Space>
-          <Typography.Paragraph>skdvnksnvksndkv vksdnvnsdkvn</Typography.Paragraph>
+          <Typography.Paragraph>{item && item.LocalizedDescriptions ? item.LocalizedDescriptions[filters.language] : ''}</Typography.Paragraph>
         </Space>
       </Space>
       <Row style={{ marginTop: '48px' }}>

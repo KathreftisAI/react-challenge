@@ -4,10 +4,10 @@ import './sidebar.css';
 
 const Sidebar = ({ itemName, handleEnhancementChange, handleNameChange, handleQualityChange, handleTierChange }) => {
 
-  const [name, setName] = useState('');
-  const [tier, setTier] = useState('');
-  const [enhancement, setEnhancement] = useState(0);
-  const [quality, setQuality] = useState(0);
+  const [name, setName] = useState();
+  const [tier, setTier] = useState();
+  const [enhancement, setEnhancement] = useState();
+  const [quality, setQuality] = useState();
 
   const changeItemName = (option) => {
     setName(option);
@@ -59,22 +59,22 @@ const Sidebar = ({ itemName, handleEnhancementChange, handleNameChange, handleQu
         placeholder='Select Enhancement'
         onChange={changeEnhancement}
         value={enhancement}>
-        <Select.Option value='0'>0</Select.Option>
-        <Select.Option value='1'>1</Select.Option>
-        <Select.Option value='2'>2</Select.Option>
-        <Select.Option value='3'>3</Select.Option>
+        <Select.Option value={0}>0</Select.Option>
+        <Select.Option value={1}>1</Select.Option>
+        <Select.Option value={2}>2</Select.Option>
+        <Select.Option value={3}>3</Select.Option>
       </Select>
       <Select
         className='sidebar-select'
         placeholder='Select Quality'
         onChange={changeQuality}
         value={quality}>
-        <Select.Option value='0'>Default</Select.Option>
-        <Select.Option value='1'>Normal</Select.Option>
-        <Select.Option value='2'>Good</Select.Option>
-        <Select.Option value='3'>Outstanding</Select.Option>
-        <Select.Option value='4'>Excellent</Select.Option>
-        <Select.Option value='5'>Masterpiece</Select.Option>
+        <Select.Option value={0}>Default</Select.Option>
+        <Select.Option value={1}>Normal</Select.Option>
+        <Select.Option value={2}>Good</Select.Option>
+        <Select.Option value={3}>Outstanding</Select.Option>
+        <Select.Option value={4}>Excellent</Select.Option>
+        <Select.Option value={5}>Masterpiece</Select.Option>
       </Select>
     </section>
   );

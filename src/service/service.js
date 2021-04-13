@@ -11,9 +11,9 @@ export const getItemList = () => {
   })
 };
 
-export const getPrice = () => {
+export const getPrice = (name, quality) => {
   return new Promise((resolve, reject) => {
-    axios.get('https://www.albion-online-data.com/api/v2/stats/Prices/{itemList}.{format}')
+    axios.get(`https://www.albion-online-data.com/api/v2/stats/Prices/${name}.json?quality=${quality}`)
     .then(({ status, data }) => {
       if(status === 200){
         resolve(data)

@@ -2,23 +2,30 @@ import React, { useEffect } from 'react';
 import Header from '../../components/header/Header';
 import Sidebar from '../../components/sidebar/Sidebar';
 import MainContent from '../../components/main-content/MainContent';
-import { getItemList } from '../../service/service';
+import { getItemList, getPrice } from '../../service/service';
 import { useDispatch, useSelector } from 'react-redux';
-import { setItemList, changeLanguage, changeItemName, changeTier, changeEnhancement, changeQuality } from '../../redux/actions';
+import { setItemList, setItemPrice, setItemObj, changeLanguage, changeItemName, changeTier, changeEnhancement, changeQuality, setPrice } from '../../redux/actions';
 
-const MainPage = ({}) => {
-
+const MainPage = () => {
+  console.log('ancsdfsdgmsdkvms')
   const itemList = useSelector(state => state.itemList);
-  useEffect(() => {
-    handleGetItemList();
-  }, [])
-
+  const filters = useSelector(state => state.filters);
+  const item = useSelector(state => state.itemObj);
   const dispatch = useDispatch();
   
-  const handleGetItemList = () => {
+  useEffect(() => {
     getItemList().then(data => {
       dispatch(setItemList(data));
     }).catch(error => console.error(error));
+  }, [])
+
+  
+  const handleGetPrice = () => {
+    if(item.UniqueName !== '' || item.UniqueName !== undefined || item.UniqueName !== null){
+      getPrice(item.UniqueName, filters.quality).then(data => {
+        dispatch(setItemPrice(data))
+      }).catch(error => console.error(error))
+    }
   }
   
   const uniqueItemName = itemList.map(item => {
@@ -29,11 +36,10 @@ const MainPage = ({}) => {
     return arr.indexOf(item) === index; 
   })
 
-  const filters = useSelector(state => state.filters);
-
+  
   const createString = () => {
     if(filters.itemName !== '' && filters.tier !== '' && filters.enhancement !== 0){
-      return `${filters.tier}_${filters.itemName.replaceAll(' ', '_')}@${filters.enhancement}`
+      return `${filters.tier}_${filters.itemName.replaceAll(' ', '_')}@${filters.enhancement === 0 ? '' : filters.enhancement}`
     }else if(filters.tier !== '' &&  filters.itemName !== ''){
       return `${filters.tier}_${filters.itemName.replaceAll(' ', '_')}`;
     }else if(filters.itemName !== ''){
@@ -42,29 +48,37 @@ const MainPage = ({}) => {
       return null;
     }
   }
-  const itemObject = () => itemList.filter(item => {
-    if(createString() !== null){
-     return item.UniqueName.includes(createString);
+  const itemObject = (string) => itemList.find(item => {
+    if(string !== null){
+      const itemObject = item.UniqueName.includes(string) 
+      return itemObject;
     }
+    return false;
   })
-  
+  const itemObjvar = itemObject(createString())
+  console.log('itemObject', itemObjvar);
+
   const handleLanguageChange = (ln) => {
     dispatch(changeLanguage(ln));
   }
   const handleNameChange = (name) => {
     dispatch(changeItemName(name));
-    itemObject();
+    // dispatch(setItemObj(itemObject(createString())))
+    // handleGetPrice()
   }
   const handleTierChange = (tier) => {
     dispatch(changeTier(tier));
-    itemObject();
+    // dispatch(setItemObj(itemObject(createString())))
+    // handleGetPrice()
   }
   const handleEnhancementChange = (en) => {
     dispatch(changeEnhancement(en));
-    itemObject();
+    dispatch(setItemObj(itemObject(createString())))
+    handleGetPrice()
   }
   const handleQualityChange = (quality) => {
     dispatch(changeQuality(quality));
+    handleGetPrice()
   }
 
   return(
@@ -77,12 +91,10 @@ const MainPage = ({}) => {
         handleNameChange={handleNameChange}
         handleQualityChange={handleQualityChange}
         handleTierChange={handleTierChange} />
+      <p>{filters.name}</p>
       <MainContent 
-        language={filters.language}
-        name={filters.itemName}
-        tier={filters.tier}
-        enhancement={filters.enhancement}
-        quality={filters.quality} />
+        filters={filters}
+        item={item} />
     </>
   );
 }
