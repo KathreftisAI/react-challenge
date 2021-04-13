@@ -4,28 +4,19 @@ import './sidebar.css';
 
 const Sidebar = ({ itemName, handleEnhancementChange, handleNameChange, handleQualityChange, handleTierChange }) => {
 
-  const [name, setName] = useState();
-  const [tier, setTier] = useState();
-  const [enhancement, setEnhancement] = useState();
-  const [quality, setQuality] = useState();
-
   const changeItemName = (option) => {
-    setName(option);
     handleNameChange(option);
   }
 
   const changeTier = (option) => {
-    setTier(option);
     handleTierChange(option);
   }
 
   const changeEnhancement = (option) => {
-    setEnhancement(option);
     handleEnhancementChange(option);
   }
 
   const changeQuality = (option) => {
-    setQuality(option);
     handleQualityChange(option);
   }
 
@@ -34,8 +25,7 @@ const Sidebar = ({ itemName, handleEnhancementChange, handleNameChange, handleQu
       <Select
         className='sidebar-select'
         placeholder='Select Item'
-        onChange={changeItemName}
-        value={name}>
+        onChange={changeItemName}>
         {itemName.map(item => {
           return <Select.Option key={item} value={item}>{item}</Select.Option>
         })}
@@ -43,8 +33,7 @@ const Sidebar = ({ itemName, handleEnhancementChange, handleNameChange, handleQu
       <Select 
         className='sidebar-select'
         placeholder='Select Tier'
-        onChange={changeTier}
-        value={tier}>
+        onChange={changeTier}>
         <Select.Option value='T1'>T1</Select.Option>
         <Select.Option value='T2'>T2</Select.Option>
         <Select.Option value='T3'>T3</Select.Option>
@@ -57,8 +46,7 @@ const Sidebar = ({ itemName, handleEnhancementChange, handleNameChange, handleQu
       <Select
         className='sidebar-select' 
         placeholder='Select Enhancement'
-        onChange={changeEnhancement}
-        value={enhancement}>
+        onChange={changeEnhancement}>
         <Select.Option value={0}>0</Select.Option>
         <Select.Option value={1}>1</Select.Option>
         <Select.Option value={2}>2</Select.Option>
@@ -67,8 +55,7 @@ const Sidebar = ({ itemName, handleEnhancementChange, handleNameChange, handleQu
       <Select
         className='sidebar-select'
         placeholder='Select Quality'
-        onChange={changeQuality}
-        value={quality}>
+        onChange={changeQuality}>
         <Select.Option value={0}>Default</Select.Option>
         <Select.Option value={1}>Normal</Select.Option>
         <Select.Option value={2}>Good</Select.Option>

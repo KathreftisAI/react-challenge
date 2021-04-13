@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Select, Typography } from 'antd';
 import './header.css'
 
-const Header = ({ handleLanguageChange }) => {
+const Header = ({ handleLanguageChange, language }) => {
 
-  const [language, setLanguage] = useState('EN-US');
   const changeLanguage = (option) => {
-    setLanguage(option);
     handleLanguageChange(option);
   }
 
